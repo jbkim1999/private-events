@@ -1,0 +1,25 @@
+<% flash.each do |type, msg| %>
+    <p><%= msg %></p>
+<% end %>
+<h2>Event <%= @event.id %> by User <%= @event.creator.id %> </h2>
+<p><%= @event.event_date %></p>
+<p><%= @event.title %></p>
+<p><%= @event.details %></p>
+
+<h3>People attending this event:</h3>
+<% if @event.attendees.exists? %>
+  <% @event.attendees.each do |attendee| %>
+    <ul>
+      <li>User <%= attendee.id %></li>
+    </ul>
+  <% end %>
+<% else %>
+  <ul>
+    <li>No attendees at the moment</li>
+  </ul>
+<% end %>
+
+<nav>
+<%= link_to "Attend this event!", attend_path(@event), method: "post" %> |  <!--- method is not GET --->
+<%= link_to "Go back to main page", events_path %>
+</nav>

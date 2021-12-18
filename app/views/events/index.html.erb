@@ -1,0 +1,22 @@
+<h1> See all the events happening across the globe </h1>
+
+<% if @event.exists? %>
+  <% @event.each do |event| %>
+    <h2>Event <%= event.id %> by User <%= event.creator.id %> </h2>
+    <p><%= event.event_date %></p>
+    <p><%= event.title %></p>
+    <p><%= link_to "See details", event %></p>
+  <% end %>
+<% else %>
+  <p> No events are happening at the moment </p>
+<% end %>
+
+<nav>
+<% if user_signed_in? %>
+  <%= link_to "My events", user_path(current_user) %> |
+  <%= link_to "Sign Out", destroy_user_session_path, method: "delete" %> <!--- method is not GET --->
+<% else %>
+  <%= link_to "Log In", new_user_session_path %> | 
+  <%= link_to "Sign Up", new_user_registration_path %>
+<% end %>
+</nav>

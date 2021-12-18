@@ -1,0 +1,25 @@
+<br>
+<%= form_with model: event do |form| %>
+
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this form from being submitted:</h2>
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.label :event_date %>
+  <%= form.datetime_local_field :event_date %><br><br>
+
+  <%= form.label :title %>
+  <%= form.text_field :title %><br><br>
+
+  <%= form.label :details %>
+  <%= form.text_area :details %><br><br>
+  
+  <%= form.submit %>
+<% end %>

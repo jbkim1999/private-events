@@ -1,0 +1,49 @@
+<h1> Here are your events, User <%= @user.id %></h1>
+<h2> Your created, upcoming events...</h2>
+<% if @event.upcoming.exists? %>
+  <% @event.upcoming.each do |event| %>
+    <h3>Event <%= event.id %></h3>
+    <p><%= event.event_date %></p>
+    <p><%= event.title %></p>
+    <p><%= link_to "See details", event %></p>
+  <% end %>
+<% else %>
+  <p> No events created by you. How about creating one? </p>
+<% end %>
+
+<h2> You are attending... </h2>
+<% if @attended_event.upcoming.exists? %>
+  <% @attended_event.upcoming.each do |event| %>
+    <h3>Event <%= event.id %></h3>
+    <p><%= event.event_date %></p>
+    <p><%= event.title %></p>
+    <p><%= link_to "See details", event %></p>
+  <% end %>
+<% else %>
+  <p> You are not attending any events. How about attending one? </p>
+<% end %>
+
+<h2> You created/participated the following events in the past... </h2>
+<% if @event.past.exists? || @attended_event.past.exists? %>
+  <% @event.past.each do |event| %>
+    <h3>Event <%= event.id %></h3>
+    <p><%= event.event_date %></p>
+    <p><%= event.title %></p>
+    <p><%= link_to "See details", event %></p>
+  <% end %>
+  <% @attended_event.past.each do |event| %>
+    <h3>Event <%= event.id %></h3>
+    <p><%= event.event_date %></p>
+    <p><%= event.title %></p>
+    <p><%= link_to "See details", event %></p>
+  <% end %>
+<% else %>
+  <p> No events record in the past </p>
+<% end %><br>
+
+<nav>
+<%= link_to "Look out for more events", events_path %> | 
+<%= link_to "Create your event", new_event_path %>
+</nav>
+
+
